@@ -1,0 +1,1254 @@
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+    --black: #000;
+    --white: #fff;
+    --soft-white: #f4f4f4;
+    --gray: #9b9b9b;
+    --dark-gray: #181818;
+    --line: #292929;
+    --blue: #c3d9f3;
+    --accent: #c9a227;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+    --max-width: 1280px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+
+/* =========================================================
+   NAVBAR
+   VERSI LAMA — TETAP TERLIHAT
+========================================================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 82px;
+
+    z-index: 9999;
+
+    background: rgba(0, 0, 0, 0.92);
+
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(0,0,0,0.98);
+    border-bottom-color: rgba(255,255,255,0.2);
+}
+
+.nav-container {
+    width: min(100% - 48px, var(--max-width));
+    height: 100%;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* LOGO */
+
+.logo {
+    font-size: 17px;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+
+/* MENU */
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    margin-left: auto;
+    margin-right: 45px;
+}
+
+.nav-menu a {
+    position: relative;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    color: #ddd;
+
+    transition: color 0.3s ease;
+}
+
+.nav-menu a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -7px;
+
+    width: 0;
+    height: 1px;
+
+    background: var(--accent);
+
+    transition: width 0.35s var(--ease);
+}
+
+.nav-menu a:hover {
+    color: var(--accent);
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+
+/* USER AREA */
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.user-name {
+    font-size: 12px;
+
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: white;
+}
+
+.nav-user a {
+    font-size: 11px;
+
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: #aaa;
+
+    transition: color 0.3s ease;
+}
+
+.nav-user a:hover {
+    color: white;
+}
+
+
+/* MOBILE BUTTON */
+
+.menu-toggle {
+    display: none;
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid rgba(255,255,255,0.4);
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+
+    width: 18px;
+    height: 1px;
+
+    background: white;
+
+    margin: 5px auto;
+
+    transition: 0.3s;
+}
+
+
+/* MOBILE MENU */
+
+.mobile-menu {
+    position: fixed;
+
+    top: 82px;
+    left: 0;
+
+    width: 100%;
+
+    background: #000;
+
+    border-bottom: 1px solid #222;
+
+    padding: 25px;
+
+    display: none;
+
+    z-index: 9998;
+}
+
+.mobile-menu.active {
+    display: block;
+}
+
+.mobile-menu a {
+    display: block;
+
+    padding: 16px 0;
+
+    border-bottom: 1px solid #222;
+
+    font-size: 13px;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 0;
+
+    transform: scale(1.08);
+
+    animation: heroZoom 20s ease-out forwards;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0,0,0,0) 40%,
+            rgba(0,0,0,0.55) 100%
+        ),
+        linear-gradient(
+            to top,
+            rgba(0,0,0,0.92),
+            rgba(0,0,0,0.15) 65%,
+            rgba(0,0,0,0.3)
+        );
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(100% - 48px, var(--max-width));
+
+    margin: auto;
+
+    padding-top: 150px;
+    padding-bottom: 90px;
+}
+
+.hero-label {
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+
+    margin-bottom: 25px;
+
+    color: var(--accent);
+}
+
+.hero h1 {
+    max-width: 900px;
+
+    font-size: clamp(52px, 8vw, 110px);
+
+    line-height: 0.95;
+
+    font-weight: 400;
+
+    letter-spacing: -0.04em;
+
+    text-transform: uppercase;
+}
+
+.hero-description {
+    max-width: 520px;
+
+    margin-top: 30px;
+
+    color: #d0d0d0;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+}
+
+.hero-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+
+    padding: 0 25px;
+
+    margin-top: 35px;
+
+    border: 1px solid white;
+
+    border-radius: 0;
+
+    font-size: 11px;
+
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+
+    transition:
+        background 0.35s var(--ease),
+        color 0.35s var(--ease);
+}
+
+.hero-button:hover {
+    background: white;
+    color: black;
+}
+
+.hero-scroll {
+    position: absolute;
+
+    bottom: 34px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    color: #ccc;
+
+    font-size: 10px;
+
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.hero-scroll span {
+    display: block;
+
+    width: 1px;
+    height: 34px;
+
+    background: linear-gradient(to bottom, #ccc, transparent);
+
+    animation: scrollPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+
+    0%, 100% {
+        opacity: 0.3;
+        transform: scaleY(0.7);
+        transform-origin: top;
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+    width: min(100% - 48px, var(--max-width));
+
+    margin: auto;
+
+    padding: 120px 0;
+}
+
+.section-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 30px;
+
+    margin-bottom: 60px;
+}
+
+.section-label {
+    font-size: 10px;
+
+    letter-spacing: 0.25em;
+
+    text-transform: uppercase;
+
+    color: #888;
+}
+
+.section-title {
+    margin-top: 15px;
+
+    font-size: clamp(36px, 5vw, 65px);
+
+    line-height: 1;
+
+    font-weight: 400;
+
+    letter-spacing: -0.03em;
+
+    text-transform: uppercase;
+}
+
+.section-link {
+    color: var(--accent);
+
+    font-size: 11px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    transition: opacity 0.3s var(--ease);
+}
+
+.section-link:hover {
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 100px;
+
+    align-items: center;
+}
+
+.intro h2 {
+    font-size: clamp(35px, 4vw, 60px);
+
+    line-height: 1;
+
+    font-weight: 400;
+
+    text-transform: uppercase;
+}
+
+.intro-text {
+    font-family: "Playfair Display", serif;
+
+    font-size: 19px;
+
+    line-height: 1.8;
+
+    color: #c7c7c7;
+}
+
+
+/* =========================================================
+   IMAGE BAND
+========================================================= */
+
+.image-band {
+    width: 100%;
+
+    height: 60vh;
+
+    min-height: 420px;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+.image-band img {
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 1.2s cubic-bezier(.2,.7,.2,1);
+}
+
+.image-band:hover img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   CAMPAIGN GRID
+========================================================= */
+
+.campaign-grid {
+    display: grid;
+
+    /* DIUBAH: auto-fit + justify-content supaya kalau campaign
+       cuma 1-2, card-nya rapi di tengah, bukan nyempil ke kiri
+       dengan ruang kosong di sisa kolom. Di layar lebar tetap
+       kelihatan seperti 3 kolom kalau campaign-nya cukup banyak. */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+    justify-content: center;
+
+    gap: 30px;
+}
+
+.campaign-card {
+    background: #080808;
+
+    border: 1px solid #222;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.4s var(--ease),
+        transform 0.4s var(--ease),
+        box-shadow 0.4s var(--ease);
+}
+
+.campaign-card:hover {
+    border-color: #555;
+
+    transform: translateY(-6px);
+
+    box-shadow: 0 30px 60px -30px rgba(201, 164, 39, 0.25);
+}
+
+.campaign-image {
+    position: relative;
+
+    aspect-ratio: 16 / 10;
+
+    overflow: hidden;
+}
+
+/* TAMBAHAN: gradient tipis di bawah gambar biar transisi
+   ke campaign-body lebih halus, tidak putus mendadak */
+.campaign-image::after {
+    content: "";
+
+    position: absolute;
+    inset: auto 0 0 0;
+
+    height: 70px;
+
+    background: linear-gradient(to bottom, transparent, #080808);
+
+    pointer-events: none;
+}
+
+/* TAMBAHAN: badge persentase melayang di atas gambar */
+.campaign-badge {
+    position: absolute;
+
+    top: 14px;
+    left: 14px;
+
+    z-index: 2;
+
+    padding: 6px 12px;
+
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: var(--accent);
+}
+
+.campaign-image img {
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.8s ease;
+}
+
+.campaign-card:hover .campaign-image img {
+    transform: scale(1.06);
+}
+
+.campaign-body {
+    padding: 28px;
+}
+
+.campaign-body h3 {
+    font-size: 22px;
+
+    line-height: 1.2;
+
+    font-weight: 400;
+
+    text-transform: uppercase;
+}
+
+.campaign-description {
+    margin-top: 15px;
+
+    color: #999;
+
+    font-family: "Playfair Display", serif;
+
+    line-height: 1.6;
+}
+
+.campaign-progress {
+    margin-top: 25px;
+}
+
+.progress-label {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    font-size: 10px;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+
+    color: #aaa;
+}
+
+.progress-bar {
+    /* DIUBAH: dari 2px jadi 6px + rounded, biar lebih kelihatan
+       dan nggak terlalu tipis/samar */
+    height: 6px;
+    border-radius: 4px;
+
+    margin-top: 10px;
+
+    background: #292929;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+
+    background: linear-gradient(to right, #fff, var(--accent));
+
+    /* TAMBAHAN: animasi halus saat width berubah/pertama render */
+    transition: width 1s var(--ease);
+}
+
+.deadline {
+    margin-top: 15px;
+
+    padding: 10px;
+
+    background: #111;
+
+    color: #bbb;
+
+    font-size: 11px;
+
+    text-align: center;
+
+    letter-spacing: 0.05em;
+}
+
+/* TAMBAHAN: gaya "mendesak" kalau sisa waktu campaign
+   tinggal sedikit (dihitung di PHP, ditandai lewat class .urgent) */
+.deadline.urgent {
+    background: rgba(201, 60, 60, 0.12);
+    border: 1px solid rgba(255, 90, 90, 0.35);
+    color: #ff9a9a;
+
+    animation: deadlinePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes deadlinePulse {
+
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+}
+
+.card-button {
+    display: inline-flex;
+
+    margin-top: 22px;
+
+    padding: 13px 20px;
+
+    border: 1px solid #555;
+
+    font-size: 10px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    transition: 0.35s var(--ease);
+}
+
+.card-button:hover {
+    background: white;
+
+    color: black;
+
+    border-color: white;
+}
+
+
+/* =========================================================
+   NEWS
+========================================================= */
+
+.news-grid {
+    display: grid;
+
+    /* DIUBAH: sama seperti campaign-grid, auto-fit + center supaya
+       berita yang jumlahnya sedikit tidak nyempil dengan ruang
+       kosong di sisa kolom */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 360px));
+    justify-content: center;
+
+    gap: 30px;
+}
+
+.news-card {
+    border-top: 1px solid #333;
+
+    padding-top: 20px;
+
+    /* TAMBAHAN: transisi buat border & posisi saat hover */
+    transition:
+        border-color 0.4s var(--ease),
+        transform 0.4s var(--ease);
+}
+
+.news-card:hover {
+    border-top-color: var(--accent);
+
+    transform: translateY(-4px);
+}
+
+.news-image {
+    position: relative;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+}
+
+.news-image img {
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.8s ease;
+}
+
+.news-card:hover img {
+    transform: scale(1.05);
+}
+
+.news-date {
+    /* DIUBAH: dari teks polos jadi pill melayang di atas gambar,
+       konsisten sama .campaign-badge */
+    position: absolute;
+
+    top: 14px;
+    left: 14px;
+
+    z-index: 2;
+
+    padding: 6px 12px;
+
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+
+    font-size: 10px;
+
+    letter-spacing: 0.15em;
+
+    color: #ddd;
+
+    text-transform: uppercase;
+}
+
+.news-card h3 {
+    margin-top: 12px;
+
+    font-size: 23px;
+
+    font-weight: 400;
+
+    line-height: 1.15;
+
+    text-transform: uppercase;
+
+    /* TAMBAHAN: transisi warna saat hover */
+    transition: color 0.3s ease;
+}
+
+.news-card:hover h3 {
+    color: var(--accent);
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta {
+    position: relative;
+
+    min-height: 520px;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.cta img {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: brightness(0.45);
+
+    transition: transform 1s ease;
+}
+
+.cta:hover img {
+    transform: scale(1.04);
+}
+
+.cta-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(100% - 48px, var(--max-width));
+
+    margin: auto;
+}
+
+.cta h2 {
+    max-width: 750px;
+
+    font-size: clamp(45px, 7vw, 90px);
+
+    line-height: 0.95;
+
+    font-weight: 400;
+
+    text-transform: uppercase;
+}
+
+.cta p {
+    max-width: 500px;
+
+    margin-top: 25px;
+
+    font-family: "Playfair Display", serif;
+
+    color: #ccc;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+}
+
+.cta-button {
+    display: inline-flex;
+
+    margin-top: 30px;
+
+    padding: 15px 25px;
+
+    border: 1px solid white;
+
+    font-size: 11px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    transition: 0.35s var(--ease);
+}
+
+.cta-button:hover {
+    background: white;
+
+    color: black;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    border-top: 1px solid #222;
+
+    padding: 70px 0 35px;
+}
+
+.footer-container {
+    width: min(100% - 48px, var(--max-width));
+
+    margin: auto;
+}
+
+.footer-top {
+    display: grid;
+
+    grid-template-columns: 2fr repeat(3, 1fr);
+
+    gap: 40px;
+
+    padding-bottom: 70px;
+}
+
+.footer-brand {
+    font-size: 18px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+}
+
+.footer-column h4 {
+    font-size: 10px;
+
+    color: #777;
+
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+
+    margin-bottom: 20px;
+}
+
+.footer-column a {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 12px;
+
+    color: #bbb;
+
+    transition: color 0.3s;
+}
+
+.footer-column a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    padding-top: 25px;
+
+    border-top: 1px solid #222;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #666;
+
+    font-size: 10px;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(40px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   HERO ANIMATION
+========================================================= */
+
+@keyframes heroZoom {
+
+    from {
+        transform: scale(1.08);
+    }
+
+    to {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .nav-menu {
+        gap: 18px;
+
+        margin-right: 25px;
+    }
+
+    .nav-user {
+        gap: 12px;
+    }
+
+    .campaign-grid,
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .navbar {
+        height: 72px;
+    }
+
+    .nav-container {
+        width: calc(100% - 30px);
+    }
+
+    .nav-menu,
+    .nav-user {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .mobile-menu {
+        top: 72px;
+    }
+
+    .hero-content {
+        width: calc(100% - 30px);
+
+        padding-top: 130px;
+        padding-bottom: 60px;
+    }
+
+    .hero-video {
+        display: none;
+    }
+
+    .hero {
+        background-image:
+            url("../images/olek-buzunov-uCHUP_skz2M-unsplash.jpg");
+
+        background-size: cover;
+        background-position: center;
+    }
+
+    .hero-scroll {
+        display: none;
+    }
+
+    .section {
+        width: calc(100% - 30px);
+
+        padding: 80px 0;
+    }
+
+    .intro {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .campaign-grid,
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        display: block;
+    }
+
+    .section-link {
+        display: inline-block;
+
+        margin-top: 20px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .image-band {
+        min-height: 300px;
+
+        height: 45vh;
+    }
+
+}
